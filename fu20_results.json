@@ -1,0 +1,248 @@
+{
+  "part_a": {
+    "top20_pairs": [
+      {
+        "tokens": [
+          "security",
+          ","
+        ],
+        "mean_frac": 0.022136027310374493,
+        "enrichment": 14.167057478639675
+      },
+      {
+        "tokens": [
+          "security",
+          "the"
+        ],
+        "mean_frac": 0.0200995546921202,
+        "enrichment": 12.863715002956928
+      },
+      {
+        "tokens": [
+          "In",
+          "security"
+        ],
+        "mean_frac": 0.0191026178173021,
+        "enrichment": 12.225675403073343
+      },
+      {
+        "tokens": [
+          "freedom",
+          ","
+        ],
+        "mean_frac": 0.018885459161074758,
+        "enrichment": 12.086693863087845
+      },
+      {
+        "tokens": [
+          "freedom",
+          "the"
+        ],
+        "mean_frac": 0.01799885203490024,
+        "enrichment": 11.519265302336153
+      },
+      {
+        "tokens": [
+          "In",
+          "freedom"
+        ],
+        "mean_frac": 0.017830957704058303,
+        "enrichment": 11.411812930597312
+      },
+      {
+        "tokens": [
+          "a",
+          "security"
+        ],
+        "mean_frac": 0.01685147011657662,
+        "enrichment": 10.784940874609036
+      },
+      {
+        "tokens": [
+          "a",
+          "freedom"
+        ],
+        "mean_frac": 0.015514832911615619,
+        "enrichment": 9.929493063433995
+      },
+      {
+        "tokens": [
+          "In",
+          ","
+        ],
+        "mean_frac": 0.014779586172934511,
+        "enrichment": 9.458935150678087
+      },
+      {
+        "tokens": [
+          "a",
+          ","
+        ],
+        "mean_frac": 0.013958851382347906,
+        "enrichment": 8.93366488470266
+      },
+      {
+        "tokens": [
+          "In",
+          "and"
+        ],
+        "mean_frac": 0.013673115964768218,
+        "enrichment": 8.75079421745166
+      },
+      {
+        "tokens": [
+          "In",
+          "the"
+        ],
+        "mean_frac": 0.013663034495118707,
+        "enrichment": 8.744342076875972
+      },
+      {
+        "tokens": [
+          "that",
+          "security"
+        ],
+        "mean_frac": 0.013424835044356535,
+        "enrichment": 8.591894428388182
+      },
+      {
+        "tokens": [
+          ",",
+          "the"
+        ],
+        "mean_frac": 0.013415157834918208,
+        "enrichment": 8.585701014347652
+      },
+      {
+        "tokens": [
+          "In",
+          "to"
+        ],
+        "mean_frac": 0.013410507540933602,
+        "enrichment": 8.582724826197504
+      },
+      {
+        "tokens": [
+          "In",
+          "must"
+        ],
+        "mean_frac": 0.013247568599061581,
+        "enrichment": 8.47844390339941
+      },
+      {
+        "tokens": [
+          "In",
+          "a"
+        ],
+        "mean_frac": 0.013225491289646316,
+        "enrichment": 8.464314425373642
+      },
+      {
+        "tokens": [
+          "In",
+          "prioritize"
+        ],
+        "mean_frac": 0.013193799118862875,
+        "enrichment": 8.44403143607224
+      },
+      {
+        "tokens": [
+          "In",
+          "both"
+        ],
+        "mean_frac": 0.013063915401012614,
+        "enrichment": 8.360905856648072
+      },
+      {
+        "tokens": [
+          "In",
+          "that"
+        ],
+        "mean_frac": 0.013058259427874662,
+        "enrichment": 8.357286033839783
+      }
+    ],
+    "mean_per_pair": 0.011297876929109472,
+    "n_above_3x_random": 119,
+    "naive_total_pct": 134.44473545640264
+  },
+  "part_b": {
+    "dims_50": 11,
+    "dims_75": 28,
+    "dims_90": 47,
+    "dims_95": 57,
+    "mean_pair_ratio": 0.8833896469922979,
+    "pairing_verdict": "PAIRED \u2014 consistent with multi-plane superposition",
+    "eigenvalues_top10": [
+      6657.5849609375,
+      3481.29296875,
+      1881.7874755859375,
+      1225.352783203125,
+      1039.90283203125,
+      1014.4547119140625,
+      945.80322265625,
+      903.5662841796875,
+      850.4024658203125,
+      824.656494140625
+    ]
+  },
+  "part_c": {
+    "in_sentence_mean": 0.011297876929109472,
+    "control_mean": 0.009451241304685862,
+    "mc_random_mean": 0.001565915211288102,
+    "mc_random_p99": 0.002184892143824803,
+    "ratio_in_vs_ctrl": 1.195385512325038
+  },
+  "part_d": {
+    "mean_greedy_explained": 0.11994892291607259,
+    "mean_planes_used": 25.0,
+    "greedy_curve_means": [
+      0.0,
+      0.035857297529419095,
+      0.046267735151404185,
+      0.05411118542984424,
+      0.06016323719331938,
+      0.06641385669633654,
+      0.07177038470612877,
+      0.07576731781722473,
+      0.07948116833382451,
+      0.08296057014564735,
+      0.0866221396870546,
+      0.0896863526319356,
+      0.09251122823715376,
+      0.09533987116560325,
+      0.09797409597585502,
+      0.10050823960628558
+    ]
+  },
+  "part_e": [
+    {
+      "concepts": "war/peace",
+      "mean_per_pair": 0.010645151383538378,
+      "enrichment": 6.8128968854645615,
+      "greedy_explained": 0.10077605709448062
+    },
+    {
+      "concepts": "love/hate",
+      "mean_per_pair": 0.009650935473094919,
+      "enrichment": 6.176598702780748,
+      "greedy_explained": 0.08361866655537836
+    },
+    {
+      "concepts": "justice/mercy",
+      "mean_per_pair": 0.011192745481125794,
+      "enrichment": 7.163357107920508,
+      "greedy_explained": 0.08975297608613711
+    }
+  ],
+  "tests": {
+    "t1": "False",
+    "t2": "False",
+    "t3": "True",
+    "t4": true,
+    "n_pass": "2"
+  },
+  "verdict": "PARTIALLY SUPPORTED",
+  "verdict_detail": "Mixed evidence: some token-pair structure in OOP, but incomplete",
+  "elapsed": 145.73501110076904
+}

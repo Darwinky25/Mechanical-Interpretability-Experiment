@@ -1,0 +1,503 @@
+{
+  "baseline_entropy": 4.903485298156738,
+  "baseline_top5": [
+    [
+      "the",
+      0.2131
+    ],
+    [
+      "how",
+      0.0874
+    ],
+    [
+      "a",
+      0.061
+    ],
+    [
+      "our",
+      0.0473
+    ],
+    [
+      "us",
+      0.0403
+    ]
+  ],
+  "random_control": {
+    "kl_mean": 0.19409278333187102,
+    "kl_std": 0.061279619816775946,
+    "dh_mean": -0.158599591255188
+  },
+  "category_injection_kl": {
+    "A_opposition": 0.23455,
+    "B_hierarchy": 0.22006,
+    "C_causal": 0.40636,
+    "D_unrelated": 0.2131
+  },
+  "category_injection_dh": {
+    "A_opposition": 0.2849,
+    "B_hierarchy": 0.22668,
+    "C_causal": 0.33818,
+    "D_unrelated": 0.28168
+  },
+  "category_ablation_kl": {
+    "A_opposition": 4.68819,
+    "B_hierarchy": 4.3352,
+    "C_causal": 5.51262,
+    "D_unrelated": 2.41985
+  },
+  "category_ablation_dh": {
+    "A_opposition": 0.08611,
+    "B_hierarchy": 1.48766,
+    "C_causal": -0.76905,
+    "D_unrelated": 1.22105
+  },
+  "category_semantic_energy": {
+    "A_opposition": 103.88,
+    "B_hierarchy": 111.0,
+    "C_causal": 102.42,
+    "D_unrelated": 126.15
+  },
+  "pairs": {
+    "freedom/security": {
+      "cat": "A_opposition",
+      "semantic_energy": 105.36,
+      "mediator_norm": 122.73,
+      "injection_kl": 0.25142,
+      "injection_dh": 0.20933,
+      "injection_top5": [
+        [
+          "the",
+          0.2512
+        ],
+        [
+          "a",
+          0.0678
+        ],
+        [
+          "our",
+          0.0546
+        ],
+        [
+          "it",
+          0.024
+        ],
+        [
+          "us",
+          0.0199
+        ]
+      ],
+      "ablation_kl": 2.29848,
+      "ablation_dh": 0.75174,
+      "ablation_top5": [
+        [
+          "now",
+          0.1082
+        ],
+        [
+          "not",
+          0.0929
+        ],
+        [
+          "no",
+          0.0519
+        ],
+        [
+          "security",
+          0.0503
+        ],
+        [
+          "sometimes",
+          0.0244
+        ]
+      ]
+    },
+    "war/peace": {
+      "cat": "A_opposition",
+      "semantic_energy": 102.39,
+      "mediator_norm": 120.9,
+      "injection_kl": 0.21768,
+      "injection_dh": 0.36048,
+      "injection_top5": [
+        [
+          "the",
+          0.2509
+        ],
+        [
+          "a",
+          0.0777
+        ],
+        [
+          "our",
+          0.0467
+        ],
+        [
+          "how",
+          0.0192
+        ],
+        [
+          "us",
+          0.0186
+        ]
+      ],
+      "ablation_kl": 7.07791,
+      "ablation_dh": -0.57952,
+      "ablation_top5": [
+        [
+          "war",
+          0.223
+        ],
+        [
+          "War",
+          0.2073
+        ],
+        [
+          "Peace",
+          0.0485
+        ],
+        [
+          "peace",
+          0.0413
+        ],
+        [
+          "War",
+          0.0258
+        ]
+      ]
+    },
+    "king/servant": {
+      "cat": "B_hierarchy",
+      "semantic_energy": 123.35,
+      "mediator_norm": 117.71,
+      "injection_kl": 0.19039,
+      "injection_dh": 0.1041,
+      "injection_top5": [
+        [
+          "the",
+          0.2711
+        ],
+        [
+          "a",
+          0.0598
+        ],
+        [
+          "our",
+          0.0453
+        ],
+        [
+          "you",
+          0.0304
+        ],
+        [
+          "us",
+          0.0296
+        ]
+      ],
+      "ablation_kl": 3.39209,
+      "ablation_dh": 1.42928,
+      "ablation_top5": [
+        [
+          "one",
+          0.0452
+        ],
+        [
+          ",",
+          0.0438
+        ],
+        [
+          "the",
+          0.0412
+        ],
+        [
+          "standing",
+          0.0316
+        ],
+        [
+          "until",
+          0.0203
+        ]
+      ]
+    },
+    "teacher/student": {
+      "cat": "B_hierarchy",
+      "semantic_energy": 98.64,
+      "mediator_norm": 124.76,
+      "injection_kl": 0.24973,
+      "injection_dh": 0.34925,
+      "injection_top5": [
+        [
+          "the",
+          0.2119
+        ],
+        [
+          "a",
+          0.0537
+        ],
+        [
+          "how",
+          0.0504
+        ],
+        [
+          "our",
+          0.0503
+        ],
+        [
+          "education",
+          0.0212
+        ]
+      ],
+      "ablation_kl": 5.2783,
+      "ablation_dh": 1.54603,
+      "ablation_top5": [
+        [
+          "created",
+          0.0865
+        ],
+        [
+          "built",
+          0.0428
+        ],
+        [
+          "super",
+          0.0396
+        ],
+        [
+          "\u00a9",
+          0.0235
+        ],
+        [
+          "'",
+          0.0157
+        ]
+      ]
+    },
+    "fire/smoke": {
+      "cat": "C_causal",
+      "semantic_energy": 95.93,
+      "mediator_norm": 118.4,
+      "injection_kl": 0.26201,
+      "injection_dh": 0.4142,
+      "injection_top5": [
+        [
+          "the",
+          0.2134
+        ],
+        [
+          "a",
+          0.0634
+        ],
+        [
+          "our",
+          0.0552
+        ],
+        [
+          "how",
+          0.0394
+        ],
+        [
+          "it",
+          0.0323
+        ]
+      ],
+      "ablation_kl": 3.04908,
+      "ablation_dh": 0.20366,
+      "ablation_top5": [
+        [
+          "fire",
+          0.1723
+        ],
+        [
+          "not",
+          0.0661
+        ],
+        [
+          "being",
+          0.0482
+        ],
+        [
+          "one",
+          0.0374
+        ],
+        [
+          "that",
+          0.037
+        ]
+      ]
+    },
+    "rain/flood": {
+      "cat": "C_causal",
+      "semantic_energy": 108.92,
+      "mediator_norm": 124.74,
+      "injection_kl": 0.5507,
+      "injection_dh": 0.26217,
+      "injection_top5": [
+        [
+          "the",
+          0.226
+        ],
+        [
+          "our",
+          0.0618
+        ],
+        [
+          "a",
+          0.0501
+        ],
+        [
+          "climate",
+          0.0375
+        ],
+        [
+          "how",
+          0.036
+        ]
+      ],
+      "ablation_kl": 7.97617,
+      "ablation_dh": -1.74175,
+      "ablation_top5": [
+        [
+          "rain",
+          0.5373
+        ],
+        [
+          "rains",
+          0.0424
+        ],
+        [
+          "storm",
+          0.0402
+        ],
+        [
+          "wet",
+          0.0237
+        ],
+        [
+          "the",
+          0.0206
+        ]
+      ]
+    },
+    "banana/democracy": {
+      "cat": "D_unrelated",
+      "semantic_energy": 125.03,
+      "mediator_norm": 125.71,
+      "injection_kl": 0.27623,
+      "injection_dh": 0.23604,
+      "injection_top5": [
+        [
+          "the",
+          0.2391
+        ],
+        [
+          "a",
+          0.0731
+        ],
+        [
+          "our",
+          0.039
+        ],
+        [
+          "it",
+          0.0377
+        ],
+        [
+          "democracy",
+          0.026
+        ]
+      ],
+      "ablation_kl": 2.4795,
+      "ablation_dh": 1.25374,
+      "ablation_top5": [
+        [
+          "that",
+          0.0883
+        ],
+        [
+          "simple",
+          0.0755
+        ],
+        [
+          "a",
+          0.0498
+        ],
+        [
+          "the",
+          0.0281
+        ],
+        [
+          "very",
+          0.0246
+        ]
+      ]
+    },
+    "pencil/history": {
+      "cat": "D_unrelated",
+      "semantic_energy": 127.27,
+      "mediator_norm": 113.42,
+      "injection_kl": 0.14996,
+      "injection_dh": 0.32731,
+      "injection_top5": [
+        [
+          "the",
+          0.2185
+        ],
+        [
+          "a",
+          0.0652
+        ],
+        [
+          "our",
+          0.0462
+        ],
+        [
+          "it",
+          0.0443
+        ],
+        [
+          "how",
+          0.0296
+        ]
+      ],
+      "ablation_kl": 2.36019,
+      "ablation_dh": 1.18836,
+      "ablation_top5": [
+        [
+          "that",
+          0.0473
+        ],
+        [
+          "of",
+          0.0328
+        ],
+        [
+          "the",
+          0.0324
+        ],
+        [
+          "a",
+          0.0311
+        ],
+        [
+          "to",
+          0.0297
+        ]
+      ]
+    }
+  },
+  "tests": {
+    "T1_injection_ratio": {
+      "pass": false,
+      "ratio": 1.347
+    },
+    "T2_ablation_ratio": {
+      "pass": true,
+      "ratio": 2.002
+    },
+    "T3_all_above_random": false,
+    "T4_se_kl_correlation": {
+      "pass": false,
+      "rho": -0.238
+    }
+  },
+  "verdict": "WEAKLY DISCRIMINATING",
+  "n_pass": 1
+}

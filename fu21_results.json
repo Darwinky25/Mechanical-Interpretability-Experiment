@@ -1,0 +1,133 @@
+{
+  "random_baseline": 0.0015612241628736366,
+  "random_std": 0.0011181225605602328,
+  "results": {
+    "A_opposition": {
+      "mean_ipf": 0.12505,
+      "mean_enrichment": 80.1,
+      "mean_pa": 15.6,
+      "mean_stable": 27.0,
+      "pairs": [
+        {
+          "pair": "freedom/security",
+          "ipf": 0.13481,
+          "enrichment": 86.35,
+          "pa": 15.12,
+          "stable": 28
+        },
+        {
+          "pair": "hot/cold",
+          "ipf": 0.09866,
+          "enrichment": 63.19,
+          "pa": 15.91,
+          "stable": 26
+        },
+        {
+          "pair": "war/peace",
+          "ipf": 0.14167,
+          "enrichment": 90.75,
+          "pa": 15.77,
+          "stable": 27
+        }
+      ]
+    },
+    "B_hierarchy": {
+      "mean_ipf": 0.12199,
+      "mean_enrichment": 78.14,
+      "mean_pa": 15.42,
+      "mean_stable": 27.0,
+      "pairs": [
+        {
+          "pair": "king/servant",
+          "ipf": 0.12953,
+          "enrichment": 82.97,
+          "pa": 14.23,
+          "stable": 29
+        },
+        {
+          "pair": "parent/child",
+          "ipf": 0.11472,
+          "enrichment": 73.48,
+          "pa": 15.96,
+          "stable": 26
+        },
+        {
+          "pair": "teacher/student",
+          "ipf": 0.12173,
+          "enrichment": 77.97,
+          "pa": 16.06,
+          "stable": 26
+        }
+      ]
+    },
+    "C_causal": {
+      "mean_ipf": 0.11936,
+      "mean_enrichment": 76.46,
+      "mean_pa": 14.9,
+      "mean_stable": 28.3,
+      "pairs": [
+        {
+          "pair": "fire/smoke",
+          "ipf": 0.12334,
+          "enrichment": 79.0,
+          "pa": 15.15,
+          "stable": 28
+        },
+        {
+          "pair": "rain/flood",
+          "ipf": 0.1086,
+          "enrichment": 69.56,
+          "pa": 14.49,
+          "stable": 29
+        },
+        {
+          "pair": "study/knowledge",
+          "ipf": 0.12615,
+          "enrichment": 80.8,
+          "pa": 15.06,
+          "stable": 28
+        }
+      ]
+    },
+    "D_unrelated": {
+      "mean_ipf": 0.12799,
+      "mean_enrichment": 81.98,
+      "mean_pa": 13.77,
+      "mean_stable": 30.7,
+      "pairs": [
+        {
+          "pair": "banana/democracy",
+          "ipf": 0.13443,
+          "enrichment": 86.11,
+          "pa": 13.55,
+          "stable": 31
+        },
+        {
+          "pair": "cloud/justice",
+          "ipf": 0.12602,
+          "enrichment": 80.72,
+          "pa": 13.62,
+          "stable": 31
+        },
+        {
+          "pair": "pencil/history",
+          "ipf": 0.1235,
+          "enrichment": 79.11,
+          "pa": 14.15,
+          "stable": 30
+        }
+      ]
+    }
+  },
+  "tests": {
+    "T1_all_relational_above_10x": true,
+    "T2_relational_gt_2x_unrelated": {
+      "pass": false,
+      "ratio": 0.954
+    },
+    "T3_stability_ge_30": false,
+    "T4_all_relational_gt_unrelated": false
+  },
+  "verdict": "NOT SUPPORTED",
+  "n_pass": 1
+}

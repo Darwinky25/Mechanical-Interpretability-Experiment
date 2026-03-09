@@ -1,0 +1,9 @@
+# Geometric Resolution of Feature Interference - Dependencies
+# Install: pip install -r requirements.txt
+
+transformer_lens          # Mechanistic interpretability library (HookedTransformer)
+torch                     # PyTorch deep learning framework
+numpy                     # Numerical computing
+jupyterlab                # Interactive notebook environment
+pandas                    # Data manipulation and comparison tables
+plotly                    # Interactive visualizations
