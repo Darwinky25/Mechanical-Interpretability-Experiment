@@ -4,8 +4,8 @@
 
 ![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
-![arXiv](https://img.shields.io/badge/arXiv-2026.XXXXX-b31b1b)
 ![Experiments: 22](https://img.shields.io/badge/experiments-22-orange)
+![Models: GPT--2](https://img.shields.io/badge/models-GPT--2_Small_%7C_Large-purple)
 
 ---
 
@@ -159,7 +159,7 @@ Mechanical-Interpretability-Experiment/
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/<your-org>/Mechanical-Interpretability-Experiment.git
+git clone https://github.com/Darwinky25/Mechanical-Interpretability-Experiment.git
 cd Mechanical-Interpretability-Experiment
 ```
 
