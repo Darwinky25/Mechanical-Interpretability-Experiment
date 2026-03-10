@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: >-
+  Geometric Resolution of Feature Interference in
+  Superposition-Encoded Transformer Representations
+message: >-
+  If you use this work in your research, please cite it
+  using the metadata from this file.
+type: software
+date-released: "2026-03-09"
+abstract: >-
+  We investigate whether the arithmetic mean of two opposing concept
+  vectors in a transformer's residual stream can serve as a mediator
+  that resolves semantic interference at the model's decision point.
+  Through causal intervention on GPT-2 Small and GPT-2 Large, we
+  demonstrate statistically significant entropy reduction and introduce
+  a dual-process decomposition framework that factors layer-wise
+  transformations into in-plane convergence and out-of-plane injection
+  components.
+keywords:
+  - mechanistic interpretability
+  - activation steering
+  - feature interference
+  - transformer internals
+  - GPT-2
+  - residual stream analysis
+  - superposition
+license: MIT
+repository-code: >-
+  https://github.com/Darwinky25/Mechanical-Interpretability-Experiment

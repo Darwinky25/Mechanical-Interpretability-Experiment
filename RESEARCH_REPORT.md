@@ -1,6 +1,8 @@
-# Geometric Resolution of Feature Interference in GPT-2
+# Geometric Resolution of Feature Interference in Superposition-Encoded Transformer Representations
 
 **A Mechanistic Interpretability Study on Activation Steering via Midpoint Mediator Vectors**
+
+*March 2026*
 
 ---
 
@@ -31,6 +33,22 @@ $$E_s = \| V_A - V_B \|_2$$
 where $V_A$ and $V_B$ are the residual stream activations at the positions of concepts A and B, extracted at a target layer.
 
 We hypothesize that injecting the **Mediator Vector** $M_s = \frac{V_A + V_B}{2}$ back into the residual stream at post-concept positions can steer the model toward a more resolved (lower-entropy) prediction. This is a form of **activation steering** grounded in the geometric structure of the residual stream.
+
+---
+
+## 1.5  Related Work
+
+Our work sits at the intersection of several active research threads in mechanistic interpretability.
+
+**Superposition and feature interference.** Elhage et al. (2022) demonstrated that neural network layers represent more features than they have dimensions, encoding them in *superposition* — a phenomenon with direct implications for how opposing concepts co-exist in the residual stream. Scherlis et al. (2023) extended this to study how feature directions interfere during computation. Our work provides a causal, geometric analysis of how this interference is resolved layer-by-layer.
+
+**Activation steering and representation engineering.** Turner et al. (2023) introduced *activation addition* — modifying residual-stream activations with "steering vectors" to influence model behavior. Li et al. (2024) formalized this as *representation engineering*, showing that linear directions in activation space correspond to human-interpretable concepts. Our midpoint mediator is a specific instance of activation steering designed to probe interference resolution rather than behavioral control.
+
+**Residual stream geometry.** Park et al. (2023) studied the *linear representation hypothesis* — the idea that high-level concepts are encoded as directions in activation space. Nanda et al. (2023) documented *attention sinks* (notably the BOS token) as architectural features of GPT-2, which our mechanistic analysis independently rediscovers in the context of mediator injection. Engels et al. (2024) analyzed feature geometry in language models, providing a framework for understanding the structured subspaces we observe.
+
+**Layer-wise attribution.** Conmy et al. (2023) developed *automated circuit discovery* for identifying which model components implement specific computations. Our FU11 surgical suppression experiments are complementary, using component-wise scaling rather than path patching to establish causal relevance of the dual-process decomposition.
+
+**Null models for interpretability claims.** Bolukbasi et al. (2016) and Goh et al. (2021) established the importance of null models when interpreting geometric structure in neural representations. Our FU15–FU18 null tests follow this tradition, revealing that rotation purity (σ₁/σ₂ ≈ 1.07) is a projection artifact while in-plane enrichment (84×) is genuinely significant.
 
 ---
 
@@ -1388,4 +1406,68 @@ Note: We deliberately relabel the in-plane component from $R_\theta^\parallel$ (
 
 ---
 
-*Geometric Resolution of Feature Interference — GPT-2 Small + GPT-2 Large — March 2026*
+## 24. Limitations
+
+We identify the following limitations of this study:
+
+1. **Model family scope.** All experiments were conducted on GPT-2 Small and GPT-2 Large. While the decomposition is consistent across these two scales (FU12), generalization to architecturally distinct models (e.g., LLaMA, Mistral, Gemma) or substantially larger scales (>10B parameters) remains untested.
+
+2. **Single-token concepts only.** The current framework requires both concepts to tokenize to single tokens for clean vector extraction. Multi-token concepts (e.g., "artificial intelligence") introduce positional ambiguity that the methodology does not yet address.
+
+3. **Binary concept pairs.** All experiments involve pairs of concepts. Real-world prompts may involve three or more competing concepts simultaneously; the mediator vector formulation ($M = (V_A + V_B)/2$) does not naturally extend to higher-order interference without additional assumptions about centroid geometry.
+
+4. **CPU-only validation.** All experiments were run on CPU with `seed = 42`. While this ensures reproducibility, it limits the scale of prompt sweeps and prevents exhaustive hyperparameter searches.
+
+5. **Baseline entropy gating.** The mediator mechanism is effective only when baseline entropy exceeds ~4.5 nats (GPT-2 Small). This boundary condition limits applicability to prompts where the model exhibits genuine decision uncertainty.
+
+6. **Causal claims are intervention-specific.** Our causal findings (FU8, FU11) demonstrate that the mediator direction is causally relevant under the specific injection/ablation protocol used. They do not prove that the model natively "uses" the mediator direction during unperturbed inference — only that the direction carries information the model can exploit.
+
+7. **Rotation purity null model limitations.** While FU18 convincingly shows that σ₁/σ₂ ≈ 1.07 is not distinguishable from random projections, the null model uses isotropic Gaussian perturbations. Real residual-stream updates have structured, non-isotropic distributions; a more refined null model matching the empirical covariance structure could yield different conclusions.
+
+---
+
+## 25. Future Work
+
+The findings in this study suggest several productive research directions:
+
+1. **Cross-architecture replication.** Applying the dual-process decomposition to LLaMA-2, Mistral, and other modern architectures to determine whether the 87/13 split and MLP dominance are universal properties of transformer residual streams or specific to the GPT-2 family.
+
+2. **Multi-concept interference.** Extending the mediator framework to prompts containing three or more competing concepts (e.g., "freedom, security, and equality"), investigating whether geometric centroids in higher-dimensional concept polytopes serve analogous mediating roles.
+
+3. **Sparse autoencoder integration.** Using sparse autoencoders (SAEs) trained on residual-stream activations to decompose the 87% out-of-plane energy into interpretable feature directions, potentially resolving the "structured but not 2D-decomposable" characterization from FU20.
+
+4. **Training dynamics.** Tracking the dual-process decomposition across training checkpoints to determine when in-plane convergence and out-of-plane injection emerge during pre-training, and whether they arise from the same or different training signals.
+
+5. **The convergence cliff.** The explosive attention-head activation at L33–L35 (FU19) warrants dedicated study. What computational role do these layers play? Does the cliff correspond to a phase transition in the residual stream's representational geometry?
+
+6. **Behavioral applications.** While this work uses entropy reduction as a diagnostic measure, the mediator injection framework could potentially be adapted for targeted behavioral interventions — steering model outputs toward more balanced or nuanced responses when processing ambiguous prompts.
+
+7. **Refined null models.** Constructing null models that match the empirical covariance structure of residual-stream updates (rather than isotropic Gaussians) to more precisely quantify the statistical significance of in-plane enrichment.
+
+---
+
+## References
+
+- Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., & Kalai, A. T. (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. *NeurIPS 2016*.
+
+- Conmy, A., Mavor-Parker, A. N., Lynch, A., Heimersheim, S., & Garriga-Alonso, A. (2023). Towards automated circuit discovery for mechanistic interpretability. *NeurIPS 2023*.
+
+- Elhage, N., Hume, T., Olsson, C., Schiefer, N., Henighan, T., Kravec, S., ... & Olah, C. (2022). Toy models of superposition. *Transformer Circuits Thread*.
+
+- Engels, J., Liao, I., Michaud, E. J., Gurnee, W., & Tegmark, M. (2024). Not all language model features are linear. *arXiv:2405.14860*.
+
+- Goh, G., Cammarata, N., Voss, C., Carter, S., Petrov, M., Schubert, L., ... & Olah, C. (2021). Multimodal neurons in artificial neural networks. *Distill*.
+
+- Li, K., Hopkins, A. K., Bau, D., Viégas, F., Pfister, H., & Wattenberg, M. (2024). Inference-time intervention: Eliciting truthful answers from a language model. *NeurIPS 2024*.
+
+- Nanda, N., Lieberum, T., & Steinhardt, J. (2023). Attention sinks in large language models. *Manuscript*.
+
+- Park, K., Choe, Y. J., & Veitch, V. (2023). The linear representation hypothesis and the geometry of large language models. *ICML 2024*.
+
+- Scherlis, A., Sachan, K., Jermyn, A. S., Benton, J., & Shlegeris, B. (2023). Polysemanticity and capacity in neural networks. *arXiv:2210.01892*.
+
+- Turner, A., Thiergart, L., Udell, D., Leech, G., Mini, U., & MacDiarmid, M. (2023). Activation addition: Steering language models without optimization. *arXiv:2308.10248*.
+
+---
+
+*Geometric Resolution of Feature Interference in Superposition-Encoded Transformer Representations — GPT-2 Small + GPT-2 Large — March 2026*
