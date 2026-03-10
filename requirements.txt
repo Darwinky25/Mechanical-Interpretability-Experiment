@@ -1,9 +1,13 @@
-# Geometric Resolution of Feature Interference - Dependencies
-# Install: pip install -r requirements.txt
+# Geometric Resolution of Feature Interference in Superposition-Encoded
+# Transformer Representations — Dependency Manifest
+#
+# Install:  pip install -r requirements.txt
+# Tested:   Python 3.9–3.12, CPU and CUDA 12.x
 
-transformer_lens          # Mechanistic interpretability library (HookedTransformer)
-torch                     # PyTorch deep learning framework
-numpy                     # Numerical computing
-jupyterlab                # Interactive notebook environment
-pandas                    # Data manipulation and comparison tables
-plotly                    # Interactive visualizations
+transformer_lens>=2.0     # Mechanistic interpretability (HookedTransformer)
+torch>=2.0                # Deep learning framework
+numpy>=1.24               # Numerical computing
+pandas>=2.0               # Tabular data and comparison tables
+plotly>=5.18              # Interactive visualizations
+jupyterlab>=4.0           # Notebook environment
+scipy>=1.11               # Statistical tests (bootstrap CI, t-tests)

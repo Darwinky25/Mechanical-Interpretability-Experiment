@@ -1,11 +1,13 @@
-# Geometric Resolution of Feature Interference -- Experiment Report
+# Geometric Resolution of Feature Interference — Foundation Experiments
 
 **Date:** March 9, 2026
-**Framework:** Geometric Resolution of Feature Interference
-**Model:** GPT-2 Small (12 layers, 768 d_model, 12 heads, 50257 vocab)
+**Framework:** Geometric Resolution of Feature Interference in Superposition-Encoded Transformer Representations
+**Model:** GPT-2 Small (12 layers, 768 d_model, 12 heads, 50,257 vocab)
 **Library:** TransformerLens (HookedTransformer)
 **Device:** CPU
 **Seed:** 42
+
+> **Note:** This report documents the foundation experiments (Steps 1–8). For the complete study including all 22 follow-up experiments, null models, and cross-scale analysis, see [RESEARCH_REPORT.md](RESEARCH_REPORT.md) (full technical version) or [RESEARCH_REPORT_v2.md](RESEARCH_REPORT_v2.md) (accessible version).
 
 ---
 

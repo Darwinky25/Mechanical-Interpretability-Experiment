@@ -139,13 +139,16 @@ Mechanical-Interpretability-Experiment/
 │
 ├── RESEARCH_REPORT.md          # Full technical report with equations
 ├── RESEARCH_REPORT_v2.md       # Accessible version (LaTeX-free)
-├── REPORT.md                   # Initial report (foundation steps 1–8)
+├── REPORT.md                   # Foundation experiments report (steps 1–8)
 │
 ├── fu20_results.json           # Superposition hypothesis results
 ├── fu21_results.json           # Relational universality results
 ├── fu22_results.json           # Causal discrimination results
 │
-├── requirements.txt            # Python dependencies
+├── requirements.txt            # Pinned Python dependencies
+├── CITATION.cff                # Machine-readable citation metadata
+├── CONTRIBUTING.md             # Contribution guidelines
+├── LICENSE                     # MIT License
 └── README.md                   # This file
 ```
 

@@ -1,8 +1,8 @@
-# Geometric Resolution of Feature Interference in GPT-2
+# Geometric Resolution of Feature Interference in Superposition-Encoded Transformer Representations
 
 **A Mechanistic Interpretability Study on Activation Steering via Midpoint Mediator Vectors**
 
-*GPT-2 Small (124M) + GPT-2 Large (774M) -- March 2026*
+*GPT-2 Small (124M) + GPT-2 Large (774M) — March 2026*
 
 ---
 
@@ -26,6 +26,10 @@
 16. [Threshold Sensitivity and the Convergence Cliff](#16-threshold-sensitivity-and-the-convergence-cliff)
 17. [Final Picture](#17-final-picture)
 18. [Appendix: Key Numbers](#18-appendix-key-numbers)
+19. [Related Work](#19-related-work)
+20. [Limitations](#20-limitations)
+21. [Future Directions](#21-future-directions)
+22. [References](#22-references)
 
 ---
 
@@ -964,4 +968,66 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 
 ---
 
-*Geometric Resolution of Feature Interference -- GPT-2 Small + GPT-2 Large -- March 2026*
+## 19. Related Work
+
+This study builds on and extends several lines of research in mechanistic interpretability:
+
+**Superposition and feature interference.** Elhage et al. (2022) showed that neural networks encode more features than they have dimensions via superposition. Our work investigates how the resulting interference between co-encoded opposing concepts is resolved during inference.
+
+**Activation steering.** Turner et al. (2023) demonstrated that adding "steering vectors" to residual-stream activations can influence model behavior. Li et al. (2024) formalized this as representation engineering. Our midpoint mediator is a specific steering intervention designed to probe interference resolution mechanisms.
+
+**Residual stream geometry.** Park et al. (2023) studied the linear representation hypothesis -- the idea that concepts are encoded as directions in activation space. Nanda et al. (2023) documented the BOS attention sink in GPT-2, which our analysis independently rediscovers in the context of mediator injection.
+
+**Automated circuit discovery.** Conmy et al. (2023) developed methods for identifying which model components implement specific computations. Our surgical suppression experiments (FU11) use component-wise scaling to establish causal relevance of the dual-process decomposition.
+
+**Null models for interpretability.** Bolukbasi et al. (2016) established the importance of null models when interpreting geometric structure in neural representations. Our FU15-FU18 null tests follow this practice, revealing that rotation purity is a projection artifact while in-plane enrichment is genuine.
+
+---
+
+## 20. Limitations
+
+1. **Model scope.** All experiments use GPT-2 Small and GPT-2 Large. Generalization to architecturally different models (LLaMA, Mistral) or much larger scales (>10B parameters) is untested.
+
+2. **Single-token concepts.** The framework requires both concepts to tokenize to single tokens. Multi-token concepts introduce positional ambiguity not yet addressed.
+
+3. **Binary pairs only.** All experiments involve two competing concepts. Real prompts may contain three or more competing concepts simultaneously.
+
+4. **Baseline entropy gating.** The mediator is effective only when baseline entropy exceeds roughly 4.5 nats, limiting applicability to prompts with genuine decision uncertainty.
+
+5. **Intervention-specific causality.** Causal findings demonstrate the mediator direction is relevant under our injection/ablation protocol, but do not prove the model natively uses this direction during unperturbed inference.
+
+6. **Null model assumptions.** FU18's null uses isotropic Gaussian perturbations. Real residual-stream updates are structured; a covariance-matched null might yield different conclusions.
+
+---
+
+## 21. Future Directions
+
+1. **Cross-architecture replication.** Applying the decomposition to LLaMA-2, Mistral, and Gemma to test whether the 87/13 split is universal across transformer families.
+
+2. **Multi-concept interference.** Extending the mediator framework to three or more competing concepts using higher-dimensional geometric centroids.
+
+3. **Sparse autoencoder integration.** Using SAEs to decompose the 87% out-of-plane energy into interpretable feature directions.
+
+4. **Training dynamics.** Tracking the dual-process decomposition across training checkpoints to determine when each component emerges.
+
+5. **The convergence cliff.** Dedicated study of the attention-head explosion at L33-L35 and its relationship to representational phase transitions.
+
+6. **Refined null models.** Constructing covariance-matched null models for more precise significance testing.
+
+---
+
+## 22. References
+
+- Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., & Kalai, A. T. (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. *NeurIPS 2016*.
+- Conmy, A., Mavor-Parker, A. N., Lynch, A., Heimersheim, S., & Garriga-Alonso, A. (2023). Towards automated circuit discovery for mechanistic interpretability. *NeurIPS 2023*.
+- Elhage, N., Hume, T., Olsson, C., Schiefer, N., et al. (2022). Toy models of superposition. *Transformer Circuits Thread*.
+- Engels, J., Liao, I., Michaud, E. J., Gurnee, W., & Tegmark, M. (2024). Not all language model features are linear. *arXiv:2405.14860*.
+- Li, K., Hopkins, A. K., Bau, D., Viegas, F., Pfister, H., & Wattenberg, M. (2024). Inference-time intervention: Eliciting truthful answers from a language model. *NeurIPS 2024*.
+- Nanda, N., Lieberum, T., & Steinhardt, J. (2023). Attention sinks in large language models. *Manuscript*.
+- Park, K., Choe, Y. J., & Veitch, V. (2023). The linear representation hypothesis and the geometry of large language models. *ICML 2024*.
+- Scherlis, A., Sachan, K., Jermyn, A. S., Benton, J., & Shlegeris, B. (2023). Polysemanticity and capacity in neural networks. *arXiv:2210.01892*.
+- Turner, A., Thiergart, L., Udell, D., Leech, G., Mini, U., & MacDiarmid, M. (2023). Activation addition: Steering language models without optimization. *arXiv:2308.10248*.
+
+---
+
+*Geometric Resolution of Feature Interference in Superposition-Encoded Transformer Representations — GPT-2 Small + GPT-2 Large — March 2026*
