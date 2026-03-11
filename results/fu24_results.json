@@ -1,0 +1,203 @@
+{
+  "config": {
+    "n_bootstrap": 10000,
+    "n_prompts": 12,
+    "n_layers": 36,
+    "random_baseline": 0.001563,
+    "model": "gpt2-large"
+  },
+  "overall": {
+    "mean_enrichment": 79.1,
+    "ci_95_lower": 74.77,
+    "ci_95_upper": 83.06,
+    "bootstrap_std": 2.11
+  },
+  "per_prompt": {
+    "freedom/security": {
+      "category": "opposition",
+      "mean_enrichment": 86.28
+    },
+    "war/peace": {
+      "category": "opposition",
+      "mean_enrichment": 90.67
+    },
+    "hot/cold": {
+      "category": "opposition",
+      "mean_enrichment": 63.14
+    },
+    "king/servant": {
+      "category": "hierarchy",
+      "mean_enrichment": 82.9
+    },
+    "parent/child": {
+      "category": "hierarchy",
+      "mean_enrichment": 73.42
+    },
+    "teacher/student": {
+      "category": "hierarchy",
+      "mean_enrichment": 77.91
+    },
+    "fire/smoke": {
+      "category": "causal",
+      "mean_enrichment": 78.94
+    },
+    "rain/flood": {
+      "category": "causal",
+      "mean_enrichment": 69.51
+    },
+    "study/knowledge": {
+      "category": "causal",
+      "mean_enrichment": 80.73
+    },
+    "banana/democracy": {
+      "category": "unrelated",
+      "mean_enrichment": 86.04
+    },
+    "cloud/justice": {
+      "category": "unrelated",
+      "mean_enrichment": 80.65
+    },
+    "pencil/history": {
+      "category": "unrelated",
+      "mean_enrichment": 79.04
+    }
+  },
+  "per_category": {
+    "opposition": {
+      "mean": 80.0,
+      "std": 12.1,
+      "n": 3
+    },
+    "hierarchy": {
+      "mean": 78.1,
+      "std": 3.9,
+      "n": 3
+    },
+    "causal": {
+      "mean": 76.4,
+      "std": 4.9,
+      "n": 3
+    },
+    "unrelated": {
+      "mean": 81.9,
+      "std": 3.0,
+      "n": 3
+    }
+  },
+  "per_layer_mean_enrichment": [
+    6.84,
+    262.76,
+    162.59,
+    90.88,
+    35.67,
+    28.95,
+    37.2,
+    61.01,
+    62.8,
+    63.31,
+    44.37,
+    37.64,
+    25.51,
+    31.93,
+    35.86,
+    36.3,
+    59.77,
+    45.8,
+    78.63,
+    59.7,
+    57.62,
+    68.94,
+    59.59,
+    72.16,
+    64.39,
+    80.56,
+    65.66,
+    113.14,
+    83.62,
+    56.49,
+    62.74,
+    95.71,
+    220.27,
+    288.22,
+    171.4,
+    19.69
+  ],
+  "per_layer_ci_95": {
+    "lower": [
+      5.59,
+      246.31,
+      146.04,
+      77.5,
+      31.82,
+      22.8,
+      31.71,
+      52.06,
+      55.48,
+      50.94,
+      36.25,
+      32.34,
+      18.35,
+      24.24,
+      27.16,
+      30.14,
+      54.79,
+      41.87,
+      69.12,
+      54.26,
+      51.92,
+      56.88,
+      52.77,
+      65.54,
+      58.79,
+      72.07,
+      53.13,
+      101.95,
+      67.42,
+      50.22,
+      48.99,
+      82.41,
+      175.55,
+      254.05,
+      106.34,
+      11.97
+    ],
+    "upper": [
+      7.92,
+      280.22,
+      177.57,
+      105.85,
+      39.77,
+      35.48,
+      42.63,
+      71.29,
+      70.51,
+      75.77,
+      52.17,
+      42.29,
+      32.93,
+      39.52,
+      44.76,
+      42.01,
+      64.82,
+      49.31,
+      88.23,
+      65.21,
+      63.54,
+      80.47,
+      67.68,
+      78.54,
+      69.55,
+      91.06,
+      79.85,
+      124.84,
+      102.24,
+      62.44,
+      76.37,
+      111.04,
+      261.14,
+      318.75,
+      234.98,
+      27.82
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "config": {
+    "n_random_vectors": 50,
+    "injection_strength": 0.5,
+    "layer": 18,
+    "model": "gpt2-large",
+    "seed": 42
+  },
+  "per_prompt": {
+    "freedom/security": {
+      "baseline_entropy": 3.92777,
+      "mediator_norm": 121.99,
+      "mediator_delta_h": 0.09377,
+      "random_mean_delta_h": 0.24047,
+      "random_std_delta_h": 0.40304,
+      "random_p5": -0.22718,
+      "cohens_d": -0.364,
+      "below_2sigma": false,
+      "below_p5": false,
+      "d_significant": false
+    },
+    "war/peace": {
+      "baseline_entropy": 2.42333,
+      "mediator_norm": 118.16,
+      "mediator_delta_h": -0.07834,
+      "random_mean_delta_h": -0.02189,
+      "random_std_delta_h": 0.34767,
+      "random_p5": -0.61386,
+      "cohens_d": -0.1624,
+      "below_2sigma": false,
+      "below_p5": false,
+      "d_significant": false
+    },
+    "love/hate": {
+      "baseline_entropy": 3.54283,
+      "mediator_norm": 122.91,
+      "mediator_delta_h": 1.08205,
+      "random_mean_delta_h": 0.05503,
+      "random_std_delta_h": 0.35231,
+      "random_p5": -0.42809,
+      "cohens_d": 2.9151,
+      "below_2sigma": false,
+      "below_p5": false,
+      "d_significant": true
+    },
+    "justice/mercy": {
+      "baseline_entropy": 2.09076,
+      "mediator_norm": 126.24,
+      "mediator_delta_h": 0.41962,
+      "random_mean_delta_h": 0.23981,
+      "random_std_delta_h": 0.25968,
+      "random_p5": -0.08407,
+      "cohens_d": 0.6925,
+      "below_2sigma": false,
+      "below_p5": false,
+      "d_significant": true
+    },
+    "knowledge/ignorance": {
+      "baseline_entropy": 1.96276,
+      "mediator_norm": 123.79,
+      "mediator_delta_h": 1.71136,
+      "random_mean_delta_h": 0.96857,
+      "random_std_delta_h": 0.74668,
+      "random_p5": -0.13096,
+      "cohens_d": 0.9948,
+      "below_2sigma": false,
+      "below_p5": false,
+      "d_significant": true
+    }
+  },
+  "tests": {
+    "T1_below_2sigma": {
+      "pass": false,
+      "count": 0
+    },
+    "T2_below_p5": {
+      "pass": false,
+      "count": 0
+    },
+    "T3_cohens_d_significant": {
+      "pass": true,
+      "count": 3
+    },
+    "T4_paired_ttest": {
+      "pass": false,
+      "t_stat": 1.5219,
+      "p_one_sided": 0.89866
+    }
+  },
+  "verdict": "WEAK EVIDENCE \u2014 mediator is partially distinguishable from random",
+  "n_pass": 1
+}

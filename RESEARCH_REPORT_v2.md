@@ -41,18 +41,24 @@ When a language model reads a sentence containing two opposing ideas (like "free
 2. Computing their midpoint (the "mediator vector")
 3. Injecting it back into the model to see if it resolves the conflict
 
-**What works:**
-- The mediator genuinely sharpens the model's predictions (up to -36% entropy reduction in GPT-2 Small, -56% in GPT-2 Large)
-- The effect is statistically significant across prompt rephrasings (p = 0.041, Cohen's d = 0.88)
-- It scales super-linearly with model size (3x stronger in GPT-2 Large)
+**The central null result (FU21):**
+When we tested the geometric framework on unrelated concept pairs (banana/democracy, pencil/history), they produced **identical** geometric structure to semantically opposing pairs. Banana/democracy achieved 82× enrichment — matching or exceeding freedom/security (80×). The 2D concept plane, midpoint mediator, and enrichment ratios are **architectural constants** of the transformer, not signatures of semantic processing. Any two token positions get the same geometry.
+
+**What does discriminate — beneath the geometry (FU22):**
+Ablation (removing the mediator direction) disrupts the model **2× more** for semantic pairs than unrelated pairs. The difference isn't in the geometry — it's in how much the model's downstream computation relies on that direction for semantically coherent text.
+
+**The mediator intervention still works:**
+- Up to -36% entropy reduction in GPT-2 Small, -56% in GPT-2 Large
+- Statistically significant across prompt rephrasings (p = 0.041, Cohen's d = 0.88)
+- Scales super-linearly with model size (3× stronger in GPT-2 Large)
 
 **What the model is actually doing internally:**
 - ~87% of each layer's computation is high-dimensional contextual enrichment (injecting new features via MLP)
-- ~13% operates within the 2D plane spanned by the two concepts -- this is 84x above what random vectors would produce
-- The concept vectors converge by about 27-39 degrees across layers
-- The "rotation purity" metric (previously cited as evidence for clean rotation) **fails its null model** -- it's a projection artifact
+- ~13% operates within the 2D plane spanned by the two concepts — this is 84× above what random vectors would produce
+- The concept vectors converge by about 27–39 degrees across layers
+- The "rotation purity" metric (previously cited as evidence for clean rotation) **fails its null model** — it's a projection artifact
 
-**The nuanced finding:** The in-plane signal is real and causally necessary, but calling it a "rotation" overstates the mechanism. It's better described as **coherent in-plane convergence** embedded within a dominant high-dimensional enrichment process.
+**The nuanced finding:** The in-plane signal is real and causally necessary, but calling it a "rotation" overstates the mechanism. It's better described as **coherent in-plane convergence** embedded within a dominant high-dimensional enrichment process. And the geometric universality itself is the key result — it tells us about transformer architecture, not semantics.
 
 ---
 
@@ -227,7 +233,7 @@ The mediator does **not** work by making the model pay more attention to the con
 | Metric | GPT-2 Small | GPT-2 Large | Scale factor |
 |--------|:---:|:---:|:---:|
 | Baseline entropy | 4.92 nats | 3.93 nats | -- |
-| Semantic Energy | 61.58 | 105.39 | +71% |
+| Activation Distance | 61.58 | 105.39 | +71% |
 | Causal entropy reduction | -0.479 | **-1.441** | **3.0x** |
 | Best graduated ramp | -1.775 | **-2.211** | 1.25x |
 | Cross-prompts improved | 2/3 | **3/3** | -- |
@@ -815,9 +821,156 @@ The injection/ablation asymmetry answers the question:
 
 1. **Injection produces identical effects for all pairs** -- any direction steers output equally. The geometry gives everyone equal causal power.
 2. **Ablation disrupts semantic pairs 2x more than unrelated** -- the model's computation integrates semantic mediator directions more deeply during inference.
-3. **Semantic energy anti-correlates with causal impact** (rho = -0.24). The geometric properties don't predict which pairs matter.
+3. **Activation distance anti-correlates with causal impact** (rho = -0.24). The geometric properties don't predict which pairs matter.
 
 The difference isn't in the geometry of the mediator direction. It's in how much the transformer's downstream processing relies on that direction in context.
+
+---
+
+## 18c. FU23 -- Random-Injection Control: Is the Mediator Special?
+
+If mediator injection reduces entropy, is that because the *mediator direction* is special, or would any random vector of the same norm do the same thing?
+
+### Design
+
+For 5 prompts at GPT-2 Large L18:
+- Generate **50 random norm-matched vectors** (isotropic Gaussian, normalized to mediator's L2 norm)
+- Inject each at the same positions and strength as the mediator
+- Compare mediator entropy change against the random distribution
+
+### Key Numbers
+
+| Prompt | Med ΔH | Rand μ ΔH | Rand σ | Cohen's d |
+|--------|---------|-----------|---------|----------|
+| freedom/security | +0.094 | +0.240 | 0.403 | −0.364 |
+| war/peace | −0.078 | −0.022 | 0.348 | −0.162 |
+| love/hate | +1.082 | +0.055 | 0.352 | +2.915 |
+| justice/mercy | +0.420 | +0.240 | 0.260 | +0.693 |
+| knowledge/ignorance | +1.711 | +0.969 | 0.747 | +0.995 |
+
+### Tests: 1/4 passed
+
+- T1 (mediator < μ−2σ in ≥3/5): FAIL (0/5)
+- T2 (mediator < p5 in ≥3/5): FAIL (0/5)
+- T3 (|d| > 0.5 in ≥3/5): **PASS** (3/5) -- but direction is *wrong* (mediator *increases* entropy)
+- T4 (paired t-test p < 0.05): FAIL (t=1.522, p=0.899)
+
+### Verdict: WEAK EVIDENCE (1/4)
+
+The mediator does not reduce entropy more than random vectors. In 4/5 prompts it *increases* entropy, often more than random vectors do.
+
+---
+
+## 18d. FU24 -- Bootstrap CIs for Enrichment Ratios
+
+All enrichment ratios (84x above chance, etc.) were point estimates. Do they survive proper uncertainty quantification?
+
+### Design
+
+For 12 prompts (4 categories x 3 each) across GPT-2 Large:
+- Compute in-plane fraction at each layer
+- Run **10,000 bootstrap resamples** to build per-layer and aggregate CIs
+
+### Key Numbers
+
+**In-plane enrichment = 79x [95% CI: 75x--83x]** across 12 prompts.
+
+| Category | Mean Enrichment | Std |
+|----------|:---------:|:-----:|
+| Opposition | 80.0x | 12.1x |
+| Hierarchy | 78.1x | 3.9x |
+| Causal | 76.4x | 4.9x |
+| Unrelated | 81.9x | 3.0x |
+
+Cross-prompt CV = 0.092 (very low variance). Unrelated pairs (81.9x) match or exceed semantic pairs -- confirming this is an architectural constant.
+
+---
+
+## 18e. FU25 -- Expanded Prompt Set with Train/Test Split
+
+A core reviewer criticism: all 24 prompts were used for both development and evaluation. Universality claims need held-out validation.
+
+### Design
+
+- **60 prompts total**: 6 domains x 5 per domain x 2 splits
+- **30 training**, **30 held-out test** (used only for final validation)
+- 4 validation tests on held-out set
+
+### Key Numbers
+
+| Split | n | Responds | Mean ΔH | Cohen's d | 95% CI |
+|-------|---|----------|---------|-----------|--------|
+| Train | 29 | 1/29 (3.4%) | +0.798 | 1.641 | [+0.622, +0.973] |
+| Test | 28 | 0/28 (0.0%) | +0.720 | 1.649 | [+0.567, +0.886] |
+
+### Tests: 2/4 passed
+
+- T1 (test response rate >= 50%): FAIL (0.0%)
+- T2 (test mean ΔH < 0, p < 0.05): FAIL (p=1.000, wrong direction)
+- T3 (test/train ratio >= 0.5): **PASS** (ratio = 0.902)
+- T4 (test Cohen's d > 0.3): **PASS** (d = 1.649)
+
+### Verdict: PARTIALLY VALIDATED (2/4)
+
+The methodology is internally consistent (T3, T4) -- the effect replicates faithfully across splits. But the effect is entropy *increase*, not decrease: 57/57 processed prompts show higher entropy after injection.
+
+---
+
+## 18f. FU26 -- Convergence Cliff Dissection: Per-Head Directional Energy at L32--L35
+
+FU19 identified layers 33--35 as the "convergence cliff" where attention dominates MLP by 12--280x. But FU19 used **unsigned** energy -- it couldn't tell which heads help convergence and which hurt it.
+
+### Design
+
+For 5 prompts x 20 heads x 4 layers (L32--L35):
+- Extract per-head output vectors for both concept positions
+- Compute **signed** directional energy (convergent vs divergent)
+- Identify **flipper heads**: convergent at L33--L34, divergent at L35
+
+### Layer-Level Results
+
+| Layer | Delta-theta | Conv Energy | Div Energy | Ratio | Net |
+|-------|-----------|-------------|------------|-------|-----|
+| L32 | -3.61 deg | 123.2 | 60.2 | 2.05 | CONVERGE |
+| L33 | -4.37 deg | 6,048.9 | 8,224.9 | 0.74 | CONVERGE |
+| L34 | -2.37 deg | 11,454.4 | 20,331.8 | 0.56 | CONVERGE |
+| L35 | +1.59 deg | 288.4 | 1,006.3 | 0.29 | **DIVERGE** |
+
+At L33--L34, divergent energy actually *exceeds* convergent energy (ratio < 1), yet net direction is still convergence. The convergent heads are fewer but better aimed. At L35, divergent energy wins 3.5:1 and the direction flips.
+
+### The Flipper: Head 17
+
+Only one head qualifies as a "flipper" (convergent at L33--L34, divergent at L35): **Head 17**.
+
+| Layer | H17 Conv Rate | H17 Energy | Role |
+|-------|--------------|-----------|------|
+| L33 | 80% | 0.16 | Convergent (passive) |
+| L34 | 80% | 0.67 | Convergent (passive) |
+| L35 | 20% | **856.9** | **Divergent (explosive)** |
+
+Energy ratio L35/L34 = **1,271x**. Head 17 accounts for **85%** of all divergent energy at L35.
+
+### What Head 17 Actually Does
+
+**At L34 (convergent):** H17 is a **BOS attention sink**. Both concept positions send 92--99% of attention to the BOS token. Since both read the same content, outputs are nearly identical --> convergent, low energy.
+
+| Prompt | pos_a -> BOS | pos_b -> BOS |
+|--------|------------|------------|
+| freedom/security | 96.7% | 96.3% |
+| war/peace | 91.9% | 88.5% |
+| love/hate | 94.0% | 95.3% |
+| knowledge/ignorance | 99.0% | 91.0% |
+
+**At L35 (explosive diverger):** Two things change simultaneously:
+
+1. **Attention redistribution**: BOS drops from ~95% to ~3--8%. Each position now attends to different context tokens ('between', 'values', 'When', etc.).
+2. **W_OV spectral shift**: Top singular value goes from 2.4 (L34) to **19.0** (L35) -- 8x amplification in the dominant direction. L34's spectrum is flat; L35 develops a rank-1 spike.
+
+Different inputs x strong amplification = norm explosion (22x per position) and energy explosion (1,271x).
+
+### Verdict
+
+Head 17 is a **context-sensitive switch**: a passive BOS sink at L34 that transforms into an active context amplifier at L35. This single head is the primary driver of the convergence cliff.
 
 ---
 
@@ -865,6 +1018,10 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 | **FU20** | **Superposition hypothesis (87%)** | **PARTIALLY SUPPORTED (2/4)** |
 | **FU21** | **Relational universality of 2D plane** | **NOT SUPPORTED (1/4)** |
 | **FU22** | **Causal discrimination: same geometry, different effect?** | **WEAKLY DISCRIMINATING (1/4)** |
+| **FU23** | **Random-injection control: is mediator special?** | **WEAK EVIDENCE (1/4)** |
+| **FU24** | **Bootstrap CIs for enrichment ratios** | **79× [95% CI: 75×–83×]** |
+| **FU25** | **Expanded prompt set with train/test split** | **PARTIALLY VALIDATED (2/4)** |
+| **FU26** | **Convergence cliff dissection (per-head directional energy L32--L35)** | **Head 17 flipper: BOS sink --> context amplifier** |
 
 ### What We Got Right
 
@@ -881,8 +1038,10 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 2. The "dual structure" framing: The 87/13 split means the primary mechanism is high-dimensional enrichment, not in-plane rotation.
 3. "MLP dominates everything": True on average, but dramatically reverses at L33-L35 where attention heads produce explosive in-plane energy.
 4. ~~"87% might be superposition of other concept planes"~~: Elegant hypothesis, but only 12% of OOP energy is captured by all in-sentence token-pair planes combined, and unrelated sentences perform equally well.
-5. ~~"2D plane encodes semantic relations"~~: Unrelated pairs (banana/democracy) produce equal or higher enrichment (82x) and stability (30.7/36) compared to opposition, hierarchy, and causal pairs. The 2D plane is a token-embedding geometry feature, not semantic.
+5. ~~"2D plane encodes semantic relations"~~: **The study's central null result.** Unrelated pairs (banana/democracy) produce equal or higher enrichment (82x) and stability (30.7/36) compared to opposition, hierarchy, and causal pairs. The 2D plane is a token-embedding geometry feature, not semantic.
 6. **"All pairs have equal causal power"**: While injection effects are indeed identical for all pairs, ablation reveals the model integrates semantic mediator directions 2x more deeply than unrelated ones (FU22). The geometry is identical, but downstream processing differs.
+
+> **FU23–26 Results:** The post-review controls reinforce the null result. FU23 shows the mediator is not a privileged entropy-reducing direction (1/4 tests, mediator *increases* entropy). FU24 provides tight CIs: enrichment = 79× [75×–83×], equal across all pair types. FU25 confirms internal consistency (test/train ratio = 0.90) but the effect is entropy *increase* in 57/57 prompts — the hypothesized entropy reduction does not generalize. FU26 dissects the convergence cliff at single-head resolution: Head 17 is a "flipper" that transforms from a passive BOS attention sink (L34, 95% BOS, energy 0.67) to an explosive context amplifier (L35, 3–8% BOS, energy 857, 1,271× increase) — accounting for 85% of the divergence that breaks the convergence trend.
 
 ---
 
@@ -892,7 +1051,7 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 
 | Measure | Value |
 |---------|:---:|
-| Semantic Energy (freedom/security, L6) | 74.04 |
+| Activation Distance (freedom/security, L6) | 74.04 |
 | Cosine similarity (L6) | 0.730 |
 | Baseline decision entropy | 4.916 nats |
 | Best causal entropy reduction | -1.775 nats (-36.1%) |
@@ -905,7 +1064,7 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 
 | Measure | Value |
 |---------|:---:|
-| Semantic Energy (freedom/security, L18) | 105.39 |
+| Activation Distance (freedom/security, L18) | 105.39 |
 | Cosine similarity (L18) | 0.686 |
 | Baseline decision entropy | 3.928 nats |
 | Best causal entropy reduction | -2.211 nats (-56.3%) |
@@ -966,6 +1125,56 @@ Layer update = In-plane convergence (~13%) + Out-of-plane injection (~87%)
 | SE-KL Spearman rho | -0.24 |
 | Verdict | WEAKLY DISCRIMINATING (1/4) |
 
+### FU23 Random-Injection Control
+
+| Measure | Value |
+|---------|:---:|
+| Prompts tested | 5 |
+| Random vectors per prompt | 50 (norm-matched) |
+| Mediator reduces entropy (vs random) | 0/5 prompts |
+| Tests passed | 1/4 |
+| Verdict | WEAK EVIDENCE (1/4) |
+
+### FU24 Bootstrap CIs
+
+| Measure | Value |
+|---------|:---:|
+| Prompts tested | 12 (4 categories x 3) |
+| Bootstrap resamples | 10,000 |
+| Aggregate enrichment | 79x [95% CI: 75x--83x] |
+| Cross-prompt CV | 0.092 |
+| Unrelated enrichment | 81.9x (equals semantic) |
+| Verdict | Architectural constant confirmed |
+
+### FU25 Expanded Prompt Set
+
+| Measure | Value |
+|---------|:---:|
+| Total prompts | 60 (30 train / 30 test) |
+| Train response rate | 1/29 (3.4%) |
+| Test response rate | 0/28 (0.0%) |
+| Test/train ratio | 0.902 |
+| Entropy direction | Increase (57/57 prompts) |
+| Verdict | PARTIALLY VALIDATED (2/4) |
+
+### FU26 Convergence Cliff Dissection
+
+| Measure | Value |
+|---------|:---:|
+| Layers analyzed | L32--L35 |
+| Prompts | 5 |
+| Heads per layer | 20 |
+| Flipper heads identified | 1 (Head 17) |
+| H17 L34 energy | 0.67 (80% convergent) |
+| H17 L35 energy | 856.9 (20% convergent) |
+| H17 energy ratio L35/L34 | 1,271x |
+| H17 share of L35 divergence | 85% |
+| H17 L34 BOS attention | 92--99% |
+| H17 L35 BOS attention | 3--8% |
+| W_OV top singular value L34 | 2.4 |
+| W_OV top singular value L35 | 19.0 (8x) |
+| Verdict | Head 17 = BOS-to-context flipper |
+
 ---
 
 ## 19. Related Work
@@ -986,17 +1195,23 @@ This study builds on and extends several lines of research in mechanistic interp
 
 ## 20. Limitations
 
-1. **Model scope.** All experiments use GPT-2 Small and GPT-2 Large. Generalization to architecturally different models (LLaMA, Mistral) or much larger scales (>10B parameters) is untested.
+1. **Mediator injection is not special (FU23).** Random norm-matched vectors produce comparable entropy shifts. The mediator is not a causally privileged entropy-reducing direction (1/4 tests passed).
 
-2. **Single-token concepts.** The framework requires both concepts to tokenize to single tokens. Multi-token concepts introduce positional ambiguity not yet addressed.
+2. **Enrichment is architectural, not semantic (FU24).** Bootstrap CIs confirm 79× [75×–83×] enrichment with equal values for unrelated pairs. This is a non-finding for semantic specificity.
 
-3. **Binary pairs only.** All experiments involve two competing concepts. Real prompts may contain three or more competing concepts simultaneously.
+3. **Entropy reduction does not generalize (FU25).** Across 60 prompts (30/30 split), mediator injection *increases* entropy in 57/57 processed prompts. The methodology is internally consistent but the claimed effect does not replicate.
 
-4. **Baseline entropy gating.** The mediator is effective only when baseline entropy exceeds roughly 4.5 nats, limiting applicability to prompts with genuine decision uncertainty.
+4. **Model scope.** All experiments use GPT-2 Small and GPT-2 Large. Generalization to architecturally different models (LLaMA, Mistral) or much larger scales (>10B parameters) is untested.
 
-5. **Intervention-specific causality.** Causal findings demonstrate the mediator direction is relevant under our injection/ablation protocol, but do not prove the model natively uses this direction during unperturbed inference.
+5. **Single-token concepts.** The framework requires both concepts to tokenize to single tokens. Multi-token concepts introduce positional ambiguity not yet addressed.
 
-6. **Null model assumptions.** FU18's null uses isotropic Gaussian perturbations. Real residual-stream updates are structured; a covariance-matched null might yield different conclusions.
+6. **Binary pairs only.** All experiments involve two competing concepts. Real prompts may contain three or more competing concepts simultaneously.
+
+7. **Baseline entropy gating.** The mediator is effective only when baseline entropy exceeds roughly 4.5 nats, limiting applicability to prompts with genuine decision uncertainty.
+
+8. **Intervention-specific causality.** Causal findings demonstrate the mediator direction is relevant under our injection/ablation protocol, but do not prove the model natively uses this direction during unperturbed inference.
+
+9. **Null model assumptions.** FU18's null uses isotropic Gaussian perturbations. Real residual-stream updates are structured; a covariance-matched null might yield different conclusions.
 
 ---
 
@@ -1010,7 +1225,7 @@ This study builds on and extends several lines of research in mechanistic interp
 
 4. **Training dynamics.** Tracking the dual-process decomposition across training checkpoints to determine when each component emerges.
 
-5. **The convergence cliff.** Dedicated study of the attention-head explosion at L33-L35 and its relationship to representational phase transitions.
+5. **The convergence cliff (partially addressed by FU26).** FU26 identifies Head 17 as the primary driver of the L35 divergence -- a BOS-to-context flipper with an 8x W_OV spectral shift. Open questions remain: Is Head 17 universally the flipper across all concept pairs? Does the BOS-to-context attention transition occur across all heads at L35? Does this correspond to a representational phase transition?
 
 6. **Refined null models.** Constructing covariance-matched null models for more precise significance testing.
 

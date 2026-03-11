@@ -1,0 +1,633 @@
+{
+  "config": {
+    "n_train": 30,
+    "n_test": 30,
+    "injection_strength": 0.5,
+    "layer": 18,
+    "model": "gpt2-large"
+  },
+  "train": {
+    "stats": {
+      "name": "train",
+      "n": 29,
+      "n_responds": 1,
+      "response_rate": 0.034,
+      "mean_delta_h": 0.79838,
+      "std_delta_h": 0.48657,
+      "t_stat": 8.8361,
+      "p_value": 1.0,
+      "cohens_d": 1.641,
+      "ci_95_lower": 0.62228,
+      "ci_95_upper": 0.97292
+    },
+    "results": [
+      {
+        "label": "freedom/security",
+        "domain": "political",
+        "baseline_entropy": 3.92777,
+        "injected_entropy": 4.02154,
+        "delta_h": 0.09377,
+        "pct_change": 2.39,
+        "mediator_norm": 121.99,
+        "responds": false
+      },
+      {
+        "label": "liberty/control",
+        "domain": "political",
+        "baseline_entropy": 3.10389,
+        "injected_entropy": 3.98011,
+        "delta_h": 0.87622,
+        "pct_change": 28.23,
+        "mediator_norm": 113.12,
+        "responds": false
+      },
+      {
+        "label": "equality/hierarchy",
+        "domain": "political",
+        "baseline_entropy": 4.46675,
+        "injected_entropy": 5.15289,
+        "delta_h": 0.68614,
+        "pct_change": 15.36,
+        "mediator_norm": 130.43,
+        "responds": false
+      },
+      {
+        "label": "power/justice",
+        "domain": "political",
+        "baseline_entropy": 3.02362,
+        "injected_entropy": 3.81861,
+        "delta_h": 0.79499,
+        "pct_change": 26.29,
+        "mediator_norm": 109.07,
+        "responds": false
+      },
+      {
+        "label": "tradition/progress",
+        "domain": "political",
+        "baseline_entropy": 4.85831,
+        "injected_entropy": 5.2317,
+        "delta_h": 0.37339,
+        "pct_change": 7.69,
+        "mediator_norm": 122.88,
+        "responds": false
+      },
+      {
+        "label": "war/peace",
+        "domain": "conflict",
+        "baseline_entropy": 2.42333,
+        "injected_entropy": 2.34499,
+        "delta_h": -0.07834,
+        "pct_change": -3.23,
+        "mediator_norm": 118.16,
+        "responds": true
+      },
+      {
+        "label": "chaos/order",
+        "domain": "conflict",
+        "baseline_entropy": 3.5692,
+        "injected_entropy": 4.70889,
+        "delta_h": 1.13969,
+        "pct_change": 31.93,
+        "mediator_norm": 128.64,
+        "responds": false
+      },
+      {
+        "label": "unity/division",
+        "domain": "conflict",
+        "baseline_entropy": 5.78056,
+        "injected_entropy": 5.92894,
+        "delta_h": 0.14838,
+        "pct_change": 2.57,
+        "mediator_norm": 125.05,
+        "responds": false
+      },
+      {
+        "label": "conflict/harmony",
+        "domain": "conflict",
+        "baseline_entropy": 5.37093,
+        "injected_entropy": 5.39429,
+        "delta_h": 0.02336,
+        "pct_change": 0.43,
+        "mediator_norm": 120.89,
+        "responds": false
+      },
+      {
+        "label": "violence/diplomacy",
+        "domain": "conflict",
+        "baseline_entropy": 3.39351,
+        "injected_entropy": 4.164,
+        "delta_h": 0.77049,
+        "pct_change": 22.7,
+        "mediator_norm": 125.43,
+        "responds": false
+      },
+      {
+        "label": "love/hate",
+        "domain": "emotional",
+        "baseline_entropy": 3.54283,
+        "injected_entropy": 4.62488,
+        "delta_h": 1.08205,
+        "pct_change": 30.54,
+        "mediator_norm": 122.91,
+        "responds": false
+      },
+      {
+        "label": "hope/fear",
+        "domain": "emotional",
+        "baseline_entropy": 5.0662,
+        "injected_entropy": 5.31011,
+        "delta_h": 0.24392,
+        "pct_change": 4.81,
+        "mediator_norm": 120.34,
+        "responds": false
+      },
+      {
+        "label": "happiness/sadness",
+        "domain": "emotional",
+        "baseline_entropy": 2.27641,
+        "injected_entropy": 3.10581,
+        "delta_h": 0.8294,
+        "pct_change": 36.43,
+        "mediator_norm": 128.24,
+        "responds": false
+      },
+      {
+        "label": "pride/shame",
+        "domain": "emotional",
+        "baseline_entropy": 4.61263,
+        "injected_entropy": 5.15969,
+        "delta_h": 0.54705,
+        "pct_change": 11.86,
+        "mediator_norm": 121.15,
+        "responds": false
+      },
+      {
+        "label": "justice/mercy",
+        "domain": "moral",
+        "baseline_entropy": 2.09076,
+        "injected_entropy": 2.51038,
+        "delta_h": 0.41962,
+        "pct_change": 20.07,
+        "mediator_norm": 126.24,
+        "responds": false
+      },
+      {
+        "label": "good/evil",
+        "domain": "moral",
+        "baseline_entropy": 3.48046,
+        "injected_entropy": 4.57786,
+        "delta_h": 1.09739,
+        "pct_change": 31.53,
+        "mediator_norm": 115.3,
+        "responds": false
+      },
+      {
+        "label": "truth/lies",
+        "domain": "moral",
+        "baseline_entropy": 2.80033,
+        "injected_entropy": 3.77271,
+        "delta_h": 0.97238,
+        "pct_change": 34.72,
+        "mediator_norm": 117.07,
+        "responds": false
+      },
+      {
+        "label": "loyalty/betrayal",
+        "domain": "moral",
+        "baseline_entropy": 2.94937,
+        "injected_entropy": 3.55871,
+        "delta_h": 0.60934,
+        "pct_change": 20.66,
+        "mediator_norm": 132.36,
+        "responds": false
+      },
+      {
+        "label": "honesty/deception",
+        "domain": "moral",
+        "baseline_entropy": 3.42547,
+        "injected_entropy": 4.8243,
+        "delta_h": 1.39882,
+        "pct_change": 40.84,
+        "mediator_norm": 128.39,
+        "responds": false
+      },
+      {
+        "label": "life/death",
+        "domain": "existential",
+        "baseline_entropy": 3.82241,
+        "injected_entropy": 4.02876,
+        "delta_h": 0.20635,
+        "pct_change": 5.4,
+        "mediator_norm": 113.57,
+        "responds": false
+      },
+      {
+        "label": "creation/destruction",
+        "domain": "existential",
+        "baseline_entropy": 4.33031,
+        "injected_entropy": 5.40823,
+        "delta_h": 1.07792,
+        "pct_change": 24.89,
+        "mediator_norm": 116.06,
+        "responds": false
+      },
+      {
+        "label": "certainty/doubt",
+        "domain": "existential",
+        "baseline_entropy": 2.93433,
+        "injected_entropy": 4.62532,
+        "delta_h": 1.69099,
+        "pct_change": 57.63,
+        "mediator_norm": 118.32,
+        "responds": false
+      },
+      {
+        "label": "fate/choice",
+        "domain": "existential",
+        "baseline_entropy": 4.70528,
+        "injected_entropy": 5.7439,
+        "delta_h": 1.03863,
+        "pct_change": 22.07,
+        "mediator_norm": 119.8,
+        "responds": false
+      },
+      {
+        "label": "past/future",
+        "domain": "existential",
+        "baseline_entropy": 3.63379,
+        "injected_entropy": 4.79275,
+        "delta_h": 1.15895,
+        "pct_change": 31.89,
+        "mediator_norm": 120.16,
+        "responds": false
+      },
+      {
+        "label": "knowledge/ignorance",
+        "domain": "epistemic",
+        "baseline_entropy": 1.96276,
+        "injected_entropy": 3.67412,
+        "delta_h": 1.71136,
+        "pct_change": 87.19,
+        "mediator_norm": 123.79,
+        "responds": false
+      },
+      {
+        "label": "science/faith",
+        "domain": "epistemic",
+        "baseline_entropy": 3.20881,
+        "injected_entropy": 4.57012,
+        "delta_h": 1.36131,
+        "pct_change": 42.42,
+        "mediator_norm": 129.35,
+        "responds": false
+      },
+      {
+        "label": "reason/emotion",
+        "domain": "epistemic",
+        "baseline_entropy": 4.28203,
+        "injected_entropy": 4.93802,
+        "delta_h": 0.65599,
+        "pct_change": 15.32,
+        "mediator_norm": 113.59,
+        "responds": false
+      },
+      {
+        "label": "logic/intuition",
+        "domain": "epistemic",
+        "baseline_entropy": 3.94127,
+        "injected_entropy": 4.79542,
+        "delta_h": 0.85416,
+        "pct_change": 21.67,
+        "mediator_norm": 127.46,
+        "responds": false
+      },
+      {
+        "label": "theory/practice",
+        "domain": "epistemic",
+        "baseline_entropy": 2.83139,
+        "injected_entropy": 4.20056,
+        "delta_h": 1.36917,
+        "pct_change": 48.36,
+        "mediator_norm": 123.41,
+        "responds": false
+      }
+    ]
+  },
+  "test": {
+    "stats": {
+      "name": "test",
+      "n": 28,
+      "n_responds": 0,
+      "response_rate": 0.0,
+      "mean_delta_h": 0.71989,
+      "std_delta_h": 0.43647,
+      "t_stat": 8.7276,
+      "p_value": 1.0,
+      "cohens_d": 1.649,
+      "ci_95_lower": 0.56729,
+      "ci_95_upper": 0.88601
+    },
+    "results": [
+      {
+        "label": "democracy/authority",
+        "domain": "political",
+        "baseline_entropy": 3.86527,
+        "injected_entropy": 4.44895,
+        "delta_h": 0.58368,
+        "pct_change": 15.1,
+        "mediator_norm": 124.46,
+        "responds": false
+      },
+      {
+        "label": "independence/cooperation",
+        "domain": "political",
+        "baseline_entropy": 3.20914,
+        "injected_entropy": 3.90228,
+        "delta_h": 0.69314,
+        "pct_change": 21.6,
+        "mediator_norm": 124.7,
+        "responds": false
+      },
+      {
+        "label": "privacy/transparency",
+        "domain": "political",
+        "baseline_entropy": 5.61276,
+        "injected_entropy": 5.89065,
+        "delta_h": 0.2779,
+        "pct_change": 4.95,
+        "mediator_norm": 132.14,
+        "responds": false
+      },
+      {
+        "label": "sovereignty/alliance",
+        "domain": "political",
+        "baseline_entropy": 3.94357,
+        "injected_entropy": 4.57004,
+        "delta_h": 0.62646,
+        "pct_change": 15.89,
+        "mediator_norm": 124.42,
+        "responds": false
+      },
+      {
+        "label": "reform/stability",
+        "domain": "political",
+        "baseline_entropy": 3.80496,
+        "injected_entropy": 4.48024,
+        "delta_h": 0.67529,
+        "pct_change": 17.75,
+        "mediator_norm": 125.56,
+        "responds": false
+      },
+      {
+        "label": "attack/defense",
+        "domain": "conflict",
+        "baseline_entropy": 4.26825,
+        "injected_entropy": 4.71077,
+        "delta_h": 0.44251,
+        "pct_change": 10.37,
+        "mediator_norm": 113.94,
+        "responds": false
+      },
+      {
+        "label": "resistance/surrender",
+        "domain": "conflict",
+        "baseline_entropy": 4.24422,
+        "injected_entropy": 4.83705,
+        "delta_h": 0.59283,
+        "pct_change": 13.97,
+        "mediator_norm": 121.14,
+        "responds": false
+      },
+      {
+        "label": "aggression/patience",
+        "domain": "conflict",
+        "baseline_entropy": 4.93554,
+        "injected_entropy": 5.84602,
+        "delta_h": 0.91047,
+        "pct_change": 18.45,
+        "mediator_norm": 126.99,
+        "responds": false
+      },
+      {
+        "label": "strength/weakness",
+        "domain": "conflict",
+        "baseline_entropy": 5.07296,
+        "injected_entropy": 5.27111,
+        "delta_h": 0.19815,
+        "pct_change": 3.91,
+        "mediator_norm": 118.29,
+        "responds": false
+      },
+      {
+        "label": "risk/safety",
+        "domain": "conflict",
+        "baseline_entropy": 4.09838,
+        "injected_entropy": 4.98445,
+        "delta_h": 0.88606,
+        "pct_change": 21.62,
+        "mediator_norm": 118.54,
+        "responds": false
+      },
+      {
+        "label": "anger/patience",
+        "domain": "emotional",
+        "baseline_entropy": 5.77327,
+        "injected_entropy": 6.38974,
+        "delta_h": 0.61647,
+        "pct_change": 10.68,
+        "mediator_norm": 125.3,
+        "responds": false
+      },
+      {
+        "label": "joy/grief",
+        "domain": "emotional",
+        "baseline_entropy": 3.67789,
+        "injected_entropy": 4.01278,
+        "delta_h": 0.33488,
+        "pct_change": 9.11,
+        "mediator_norm": 122.82,
+        "responds": false
+      },
+      {
+        "label": "desire/restraint",
+        "domain": "emotional",
+        "baseline_entropy": 4.6695,
+        "injected_entropy": 5.20247,
+        "delta_h": 0.53297,
+        "pct_change": 11.41,
+        "mediator_norm": 121.7,
+        "responds": false
+      },
+      {
+        "label": "trust/suspicion",
+        "domain": "emotional",
+        "baseline_entropy": 3.48229,
+        "injected_entropy": 4.79615,
+        "delta_h": 1.31386,
+        "pct_change": 37.73,
+        "mediator_norm": 118.65,
+        "responds": false
+      },
+      {
+        "label": "sympathy/indifference",
+        "domain": "emotional",
+        "baseline_entropy": 4.40732,
+        "injected_entropy": 4.9366,
+        "delta_h": 0.52928,
+        "pct_change": 12.01,
+        "mediator_norm": 126.7,
+        "responds": false
+      },
+      {
+        "label": "virtue/vice",
+        "domain": "moral",
+        "baseline_entropy": 4.83686,
+        "injected_entropy": 5.00262,
+        "delta_h": 0.16576,
+        "pct_change": 3.43,
+        "mediator_norm": 127.23,
+        "responds": false
+      },
+      {
+        "label": "forgiveness/revenge",
+        "domain": "moral",
+        "baseline_entropy": 3.7137,
+        "injected_entropy": 5.59891,
+        "delta_h": 1.88521,
+        "pct_change": 50.76,
+        "mediator_norm": 130.92,
+        "responds": false
+      },
+      {
+        "label": "generosity/greed",
+        "domain": "moral",
+        "baseline_entropy": 5.792,
+        "injected_entropy": 6.13586,
+        "delta_h": 0.34386,
+        "pct_change": 5.94,
+        "mediator_norm": 127.51,
+        "responds": false
+      },
+      {
+        "label": "duty/pleasure",
+        "domain": "moral",
+        "baseline_entropy": 3.68955,
+        "injected_entropy": 4.20751,
+        "delta_h": 0.51796,
+        "pct_change": 14.04,
+        "mediator_norm": 111.44,
+        "responds": false
+      },
+      {
+        "label": "rights/obligations",
+        "domain": "moral",
+        "baseline_entropy": 4.91003,
+        "injected_entropy": 5.28962,
+        "delta_h": 0.37959,
+        "pct_change": 7.73,
+        "mediator_norm": 124.15,
+        "responds": false
+      },
+      {
+        "label": "freedom/necessity",
+        "domain": "existential",
+        "baseline_entropy": 5.15459,
+        "injected_entropy": 6.00134,
+        "delta_h": 0.84675,
+        "pct_change": 16.43,
+        "mediator_norm": 120.53,
+        "responds": false
+      },
+      {
+        "label": "growth/decay",
+        "domain": "existential",
+        "baseline_entropy": 5.22276,
+        "injected_entropy": 5.43831,
+        "delta_h": 0.21555,
+        "pct_change": 4.13,
+        "mediator_norm": 120.93,
+        "responds": false
+      },
+      {
+        "label": "meaning/absurdity",
+        "domain": "existential",
+        "baseline_entropy": 3.99303,
+        "injected_entropy": 4.85825,
+        "delta_h": 0.86523,
+        "pct_change": 21.67,
+        "mediator_norm": 117.98,
+        "responds": false
+      },
+      {
+        "label": "individual/community",
+        "domain": "existential",
+        "baseline_entropy": 4.87703,
+        "injected_entropy": 5.77529,
+        "delta_h": 0.89826,
+        "pct_change": 18.42,
+        "mediator_norm": 116.18,
+        "responds": false
+      },
+      {
+        "label": "experience/instruction",
+        "domain": "epistemic",
+        "baseline_entropy": 3.54312,
+        "injected_entropy": 5.06198,
+        "delta_h": 1.51887,
+        "pct_change": 42.87,
+        "mediator_norm": 116.99,
+        "responds": false
+      },
+      {
+        "label": "simplicity/complexity",
+        "domain": "epistemic",
+        "baseline_entropy": 3.68088,
+        "injected_entropy": 5.32754,
+        "delta_h": 1.64666,
+        "pct_change": 44.74,
+        "mediator_norm": 133.37,
+        "responds": false
+      },
+      {
+        "label": "memory/imagination",
+        "domain": "epistemic",
+        "baseline_entropy": 3.03674,
+        "injected_entropy": 4.08807,
+        "delta_h": 1.05133,
+        "pct_change": 34.62,
+        "mediator_norm": 120.0,
+        "responds": false
+      },
+      {
+        "label": "observation/speculation",
+        "domain": "epistemic",
+        "baseline_entropy": 4.11233,
+        "injected_entropy": 4.72036,
+        "delta_h": 0.60803,
+        "pct_change": 14.79,
+        "mediator_norm": 123.93,
+        "responds": false
+      }
+    ]
+  },
+  "tests": {
+    "T1_response_rate": {
+      "pass": false,
+      "rate": 0.0
+    },
+    "T2_significance": {
+      "pass": false,
+      "p": 1.0
+    },
+    "T3_effect_ratio": {
+      "pass": true,
+      "ratio": 0.902
+    },
+    "T4_cohens_d": {
+      "pass": true,
+      "d": 1.649
+    }
+  },
+  "verdict": "PARTIALLY VALIDATED \u2014 some generalization",
+  "n_pass": 2
+}

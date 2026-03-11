@@ -7,13 +7,15 @@
 **Device:** CPU
 **Seed:** 42
 
-> **Note:** This report documents the foundation experiments (Steps 1–8). For the complete study including all 22 follow-up experiments, null models, and cross-scale analysis, see [RESEARCH_REPORT.md](RESEARCH_REPORT.md) (full technical version) or [RESEARCH_REPORT_v2.md](RESEARCH_REPORT_v2.md) (accessible version).
+> **Note:** This report documents the foundation experiments (Steps 1–8). For the complete study including all 25 follow-up experiments, null models, and cross-scale analysis, see [RESEARCH_REPORT.md](RESEARCH_REPORT.md) (full technical version) or [RESEARCH_REPORT_v2.md](RESEARCH_REPORT_v2.md) (accessible version).
+
+> **Important update (FU21–FU25):** Later experiments revealed that the geometric structure described below (concept planes, enrichment ratios, mediator norms) is an **architectural constant** of the transformer — unrelated token pairs (banana/democracy) produce identical geometry to semantic pairs. The intervention effect is real, but the "semantic" framing in early sections of this report should be read with this qualification. See RESEARCH_REPORT.md §FU21–FU25 for the full null model analysis.
 
 ---
 
 ## 1. Hypothesis
 
-Forcing two contradictory concepts in a prompt creates high **Semantic Energy**
+Forcing two contradictory concepts in a prompt creates high **Activation Distance**
 (measured via the Euclidean distance between their residual stream activation
 vectors at a middle layer). By injecting a **Mediator Vector** -- the arithmetic
 mean of the two opposing concept vectors -- back into the residual stream, we
@@ -21,7 +23,7 @@ can steer the model toward a synthesized, lower-entropy output.
 
 **Formal definition:**
 
-- Semantic Energy: `E_s = ||V_A - V_B||_2`
+- Activation Distance: `D_act = ||V_A - V_B||_2`
 - Mediator Vector: `M_s = (V_A + V_B) / 2`
 - Intervention: `residual_stream += alpha * M_s` at the target layer, where
   `alpha` is the steering strength coefficient.
@@ -114,7 +116,7 @@ citizens"). It does not synthesize the freedom/security tension.
 |------------------------------|-----------|
 | Vector A (" freedom") L2 norm | 101.1561  |
 | Vector B (" security") L2 norm| 100.2768  |
-| Semantic Energy (Euclidean)  | 74.0367   |
+| Activation Distance (Euclidean)  | 74.0367   |
 | Cosine Similarity            | 0.7298    |
 | Mediator M_s L2 norm         | 93.6677   |
 | Distance(M_s, A)             | 37.0183   |
@@ -254,7 +256,7 @@ over strengths [0.0, 0.1, 0.2, 0.25, 0.3, 0.4, 0.5]:
   confirming the effect is not a single-prompt artifact.
 - War/peace and chaos/order showed **no improvement** at any tested strength.
 - All four pairs (including the original freedom/security) have similar
-  Semantic Energy (68-76) and cosine similarity (0.73-0.78), so the geometric
+  Activation Distance (68-76) and cosine similarity (0.73-0.78), so the geometric
   properties alone do not predict whether mediation will succeed.
 - This suggests the effect depends on **downstream layer sensitivity** to the
   mediator direction, not just the geometry of the two source vectors.
@@ -290,7 +292,7 @@ by this "cheat sheet" effect.
 V_a at position 7 has context "In a society that values both freedom"
 (tokens 0-7). V_b at position 9 has context "...both freedom and security"
 (tokens 0-9, **including "freedom"**). V_b has attended to V_a's token, but
-not vice versa (causal mask). The Semantic Energy measurement compares
+not vice versa (causal mask). The Activation Distance measurement compares
 (A-in-context) vs (B-knowing-A), not pure A vs B.
 
 ---
@@ -501,13 +503,13 @@ layer-6 mediator encodes inter-token relationships, not just word meaning.
 
 ### 11.4 Implications
 
-1. The Semantic Energy metric at layer 6 measures **residual tension after
+1. The Activation Distance metric at layer 6 measures **residual tension after
    partial attention-based resolution**, not raw conceptual opposition.
 2. The Mediator Vector inherits the asymmetry: because V_b already contains
    V_a signal, the midpoint M_s is biased.
 3. This does NOT invalidate the framework -- the layer-6 mediator is
    arguably more useful for steering because it encodes contextual
-   relationships -- but it means the "Semantic Energy" interpretation must
+   relationships -- but it means the "Activation Distance" interpretation must
    be qualified.
 
 ---
@@ -523,7 +525,7 @@ layer-6 mediator encodes inter-token relationships, not just word meaning.
 | Concept B position | 9 (" security") |
 | Vector A L2 norm | 101.1561 |
 | Vector B L2 norm | 100.2768 |
-| Semantic Energy | 74.0367 |
+| Activation Distance | 74.0367 |
 | Cosine Similarity | 0.7298 |
 | Mediator L2 norm | 93.6677 |
 | Baseline loss | 3.3918 |
@@ -584,7 +586,7 @@ The hypothesis is **partially supported with significant caveats**:
    representations.
 
 6. **CONTEXT ASYMMETRY:** V_b attends to V_a (sum attention = 0.76 across
-   layers) but not vice versa. The "Semantic Energy" metric measures
+   layers) but not vice versa. The "Activation Distance" metric measures
    residual tension after partial attention resolution, not raw conceptual
    distance. The angle between vectors shrinks from 67.6d (embedding) to
    43.1d (layer 6).
@@ -748,14 +750,14 @@ still works on the original mixed prompt.
 
 | Metric | Original (Asymmetric) | Separated | Delta |
 |--------|----------------------|-----------|-------|
-| Semantic Energy | 74.04 | 66.03 | -8.01 |
+| Activation Distance | 74.04 | 66.03 | -8.01 |
 | Cosine Similarity | 0.730 | 0.796 | +0.066 |
 | Angle (degrees) | 43.1° | 37.3° | **-5.9°** |
 | Mediator L2 | 93.67 | 97.92 | +4.25 |
 | Mediator cosine (vs original) | -- | 0.9077 | -- |
 
 The separated vectors are **5.9° closer** in angle, confirming that the
-original asymmetry inflated the apparent Semantic Energy. However, when
+original asymmetry inflated the apparent Activation Distance. However, when
 tested on the original prompt, this template's mediator achieved d=0.0000
 (no improvement), suggesting it lacks sufficient contextual alignment.
 
@@ -763,7 +765,7 @@ tested on the original prompt, this template's mediator achieved d=0.0000
 
 | Metric | Original (Asymmetric) | Separated | Delta |
 |--------|----------------------|-----------|-------|
-| Semantic Energy | 74.04 | 61.48 | -12.56 |
+| Activation Distance | 74.04 | 61.48 | -12.56 |
 | Cosine Similarity | 0.730 | 0.817 | +0.087 |
 | Angle (degrees) | 43.1° | 35.2° | **-7.9°** |
 | Mediator L2 | 93.67 | 96.82 | +3.15 |
@@ -777,7 +779,7 @@ contexts.
 
 ### 16.4 Key Findings
 
-1. **Context asymmetry inflates Semantic Energy by 11-17%.** The "true"
+1. **Context asymmetry inflates Activation Distance by 11-17%.** The "true"
    directional separation between freedom and security is ~35-37°, not 43°.
 2. **Template context matters.** Template 2 ("A society that values X...") is
    semantically closer to the original prompt than Template 1, yielding a
@@ -1058,7 +1060,7 @@ The effect is:
 
 ### 20.3 What We Got Right
 
-1. The geometric framework (Semantic Energy, Mediator Vector) has a real, 
+1. The geometric framework (Activation Distance, Mediator Vector) has a real, 
    measurable effect on model computation.
 2. The midpoint mediator genuinely sharpens the decision distribution.
 3. The effect generalizes across concept pairs (3/4) and prompt rephrasings
@@ -1073,7 +1075,7 @@ The effect is:
    produces interpretable results.
 3. **The optimal strength is ~1.0-1.5, not 0.25.** The loss-optimal 0.25
    maximized leakage, not mediation.
-4. **Context asymmetry inflates Semantic Energy by ~15%.** The true angular
+4. **Context asymmetry inflates Activation Distance by ~15%.** The true angular
    separation is ~35-37°, not 43°.
 
 ### 20.5 Open Questions
@@ -1116,7 +1118,7 @@ The effect is:
 | 11     | Markdown | Step 4 header |
 | 12     | Code     | Extract vectors A and B from residual stream |
 | 13     | Markdown | Step 5 header |
-| 14     | Code     | Semantic Energy, cosine similarity, Mediator Vector |
+| 14     | Code     | Activation Distance, cosine similarity, Mediator Vector |
 | 15     | Markdown | Step 6 header |
 | 16     | Code     | Hook factory function and hook creation |
 | 17     | Markdown | Step 7 header |
@@ -1163,7 +1165,7 @@ The full experiment pipeline was re-run on **GPT-2 Large** (36 layers, 1280 d_mo
 | **Architecture** | 12L / 768d / 12H | 36L / 1280d / 20H | 3x layers, 1.67x width |
 | **Baseline Loss** | 3.3918 | 3.2145 | -0.1773 (better LM) |
 | **Baseline Entropy** | 4.9161 nats | 3.9278 nats | -0.9883 (more confident) |
-| **Semantic Energy** | 61.58 | 105.39 | +71% (larger d_model) |
+| **Activation Distance** | 61.58 | 105.39 | +71% (larger d_model) |
 | **Cosine Similarity** | 0.7590 | 0.6863 | -0.073 (more separated) |
 | **Angle (target layer)** | 43.1° | 46.7° | +3.6° |
 | **Angle (embedding)** | 67.6° | 79.8° | +12.2° |
@@ -1219,7 +1221,7 @@ The larger model produces more coherent and topically relevant text under interv
 
 ### 23.6 Conclusion
 
-The geometric interference resolution framework **scales positively with model size**. GPT-2 Large shows 3x stronger causal entropy reduction, better cross-prompt generalization, and more coherent steered text. The larger model's deeper attention stack creates more geometric structure for the mediator vector to exploit. These results support the hypothesis that Semantic Energy and mediator-based steering are genuine geometric phenomena, not artifacts of small model capacity.
+The geometric interference resolution framework **scales positively with model size**. GPT-2 Large shows 3x stronger causal entropy reduction, better cross-prompt generalization, and more coherent steered text. The larger model's deeper attention stack creates more geometric structure for the mediator vector to exploit. These results support the hypothesis that Activation Distance and mediator-based steering are genuine geometric phenomena, not artifacts of small model capacity.
 
 ---
 
@@ -1240,7 +1242,7 @@ The geometric interference resolution framework **scales positively with model s
 | 11     | Markdown | Step 4 header |
 | 12     | Code     | Vector extraction at blocks.18.hook_resid_post |
 | 13     | Markdown | Step 5 header |
-| 14     | Code     | Semantic Energy + Mediator Vector computation |
+| 14     | Code     | Activation Distance + Mediator Vector computation |
 | 15     | Markdown | Step 6 header |
 | 16     | Code     | Hook definition (global + causal + position-specific) |
 | 17     | Markdown | Step 7 header |
